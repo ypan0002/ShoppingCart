@@ -1,0 +1,14 @@
+﻿<Properties StartupConfiguration="{33895682-74E6-42CF-847A-061E5785D603}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ShoppingCart/ShoppingCart/App.cs">
+    <Files>
+      <File FileName="ShoppingCart/ShoppingCart/App.cs" Line="72" Column="8" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.ShoppingCart.Android PreferredExecutionTarget="Android.Nexus_6_API_23" AndroidDesignerPreferredTheme="Theme.DeviceDefault.NoActionBar.Fullscreen" />
+  <MultiItemStartupConfigurations />
+</Properties>

@@ -1,0 +1,4 @@
+int drawable icon 0x7f020000
+int id contentFrame 0x7f040000
+int layout zxingscanneractivitylayout 0x7f030000
+int layout zxingscannerfragmentlayout 0x7f030001

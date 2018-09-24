@@ -1,0 +1,13 @@
+ShoppingCart
+System.Runtime
+Xamarin.Android.Support.v4
+Xamarin.Forms.Core
+Xamarin.Forms.Platform.Android
+Xamarin.Forms.Xaml
+zxing.monoandroid
+ZXing.Net.Mobile
+System.Resources.ResourceManager
+GalaSoft.MvvmLight
+Humanizer
+Newtonsoft.Json
+System.Diagnostics.Tools

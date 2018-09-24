@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShoppingCart.Views.CategoriesListPage"
+             xmlns:local="clr-namespace:ShoppingCart;assembly=ShoppingCart"
+             BindingContext="{x:Static local:App.CategoriesListViewModel}">
+
+  <StackLayout VerticalOptions="FillAndExpand" Padding="50">
+    <StackLayout VerticalOptions="FillAndExpand" Orientation="Horizontal">
+      <Entry Text="{Binding SearchTerm}"
+             Placeholder="Search"
+             HorizontalOptions="FillAndExpand" />
+      <Button Text ="Search"
+        Command="{Binding SearchCommand}" />
+      <Button Text ="Scan"
+        Command="{Binding ScanCommand}" />
+    </StackLayout>
+
+    <Frame>
+      <Label Text="Categories"
+        HorizontalOptions="Center"
+        Font="Bold,Large" />
+    </Frame>
+
+    <ListView ItemsSource="{Binding Categories.Result}" IsGroupingEnabled="false" ItemSelected="OnItemSelected">
+
+      <ListView.ItemTemplate>
+        <DataTemplate>
+
+          <ViewCell>
+            <Label Text="{Binding .}" YAlign="Center" Font="Large" />
+          </ViewCell>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+  </StackLayout>
+</ContentPage>
