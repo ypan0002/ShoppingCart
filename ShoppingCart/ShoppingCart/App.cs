@@ -1,4 +1,5 @@
-﻿using ShoppingCart.Models;
+﻿using Autofac;
+using ShoppingCart.Models;
 using ShoppingCart.Services;
 using ShoppingCart.ViewModels;
 using ShoppingCart.Views;
@@ -10,58 +11,58 @@ namespace ShoppingCart
 {
     public static class App
     {
-        private static NavigationPage _firstPage;
+        private static IContainer _container;
         private static NavigationService NaviService;
+        private static NavigationPage _firstPage;
 
-        static App()
+        public static void Init(AppSetup appSetup)
         {
-            // Services
-            ILoginService login = new LoginService();
-            IProductLoader loader = new ProductLoader();
-            IProductService products = new ProductService(loader);
-            IScanner scanner = DependencyService.Get<IScanner>();
-            NaviService = new NavigationService();
+            _container = appSetup.CreateContainer();
 
-            // View Models
-            WelcomeViewModel = new WelcomeViewModel(NaviService);
-            LoginViewModel = new LoginViewModel(login, NaviService);
-            CategoriesListViewModel = new CategoriesListViewModel(products, NaviService, scanner);
-            ProductsListViewModel = new ProductsListViewModel(NaviService);
+            NaviService = _container.Resolve<INavigationService>() as NavigationService;
 
-            // Pages
             WelcomePage = new WelcomePage();
             LoginPage = new LoginPage();
             CategoriesListPage = new CategoriesListPage();
 
             // Startup Page
-            FirstPage = WelcomePage;// CategoriesListPage;
-
-            // Navi
-            NaviService.Navi = FirstPage.Navigation;
-            NaviService.myPage = FirstPage;
+            StartupPage = WelcomePage;// CategoriesListPage;
         }
+
+        #region View Models
+
+        public static CategoriesListViewModel CategoriesListViewModel { get { return _container.Resolve<CategoriesListViewModel>(); } }
+
+        public static LoginViewModel LoginViewModel { get { return _container.Resolve<LoginViewModel>(); } }
+
+        public static ProductsListViewModel ProductsListViewModel { get { return _container.Resolve<ProductsListViewModel>(); } }
+
+        public static ProductViewModel ProductViewModel { get; private set; }
+
+        public static WelcomeViewModel WelcomeViewModel { get { return _container.Resolve<WelcomeViewModel>(); } }
+
+        #endregion
+
+        #region Pages
 
         public static Page CategoriesListPage { get; set; }
 
-        public static CategoriesListViewModel CategoriesListViewModel { get; set; }
-
-        public static Page FirstPage
+        public static Page StartupPage
         {
             get { return _firstPage; }
-            set { _firstPage = new NavigationPage(value); }
+            set
+            {
+                _firstPage = new NavigationPage(value);
+                NaviService.Navi = StartupPage.Navigation;
+                NaviService.myPage = StartupPage;
+            }
         }
 
         public static Page LoginPage { get; private set; }
 
-        public static LoginViewModel LoginViewModel { get; set; }
-
-        public static ProductViewModel ProductViewModel { get; set; }
-
-        public static ProductsListViewModel ProductsListViewModel { get; set; }
-
         public static Page WelcomePage { get; private set; }
 
-        public static WelcomeViewModel WelcomeViewModel { get; set; }
+        #endregion
 
         public static Page GetProductPage(Product product)
         {
